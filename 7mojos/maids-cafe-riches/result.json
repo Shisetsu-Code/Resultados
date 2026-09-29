@@ -19,10 +19,7 @@
       "Wild"
     ]
   },
-  "status": "PARTIAL",
-  "incomplete": [
-    "Natural Bonus is documented and game code shows it is resolved from extraFeatures returned by normal_spin, but a live bonus-triggering response has not yet been captured."
-  ],
+  "status": "COMPLETE",
   "actions": {
     "normal_spin": {
       "action_id": "normal_spin",
@@ -39,7 +36,7 @@
         "produces_states": [
           "ROUND_FINISHED",
           "WIN_PENDING_GAMBLE",
-          "BONUS_RUNNING"
+          "BONUS_CHOICE_REQUIRED"
         ]
       },
       "wire": {
@@ -226,26 +223,169 @@
       "action_id": "natural_bonus",
       "classification": {
         "category": "BONUS",
-        "natural_name": "Bonus natural",
-        "description_es": "El símbolo Bonus activa un juego de bonus según la documentación pública del título."
+        "natural_name": "Bonus natural Pick One",
+        "description_es": "Tres símbolos Bonus en una tirada normal activan una selección local entre cinco bandejas."
       },
-      "evidence_state": "inferred",
+      "evidence_state": "observed",
       "relation": {
         "belongs_to": "bonus",
         "parent_action": "normal_spin",
-        "requires_state": "IDLE",
+        "requires_state": "BONUS_CHOICE_REQUIRED",
         "produces_states": [
-          "BONUS_RUNNING"
+          "BONUS_CHOICE_REQUIRED"
+        ]
+      },
+      "preconditions": [
+        {
+          "source": "normal_spin_response",
+          "condition": "steps[].extraFeatures contains a bonus result"
+        },
+        {
+          "source": "game_rule",
+          "condition": "bonus threshold = 3 Bonus symbols"
+        }
+      ],
+      "wire": null,
+      "natural_request": "No se envía una request separada. El bonus llega dentro de la respuesta de normal_spin y el cliente muestra PICK ONE.",
+      "response_model_id": "bonus-extra-feature-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      },
+      "notes": [
+        "Bonus observado en vivo con autoplay STOP ON FEATURE.",
+        "El cliente consume steps[].extraFeatures y usa extraFeatures[0].result.earns como premio ya decidido por el servidor.",
+        "La elección de bandeja es local: no modifica ni envía una request de apuesta.",
+        "La API genérica contiene /spin/skillbonusresult, pero Maids Cafe Riches no la invoca en su flujo específico."
+      ]
+    },
+    "bonus_plate_top_left": {
+      "action_id": "bonus_plate_top_left",
+      "classification": {
+        "category": "CLIENT_UI",
+        "natural_name": "Elegir bandeja superior izquierda",
+        "description_es": "Selecciona una de las cinco bandejas del bonus Pick One."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "bonus_plate_choice",
+        "parent_action": "natural_bonus",
+        "requires_state": "BONUS_CHOICE_REQUIRED",
+        "produces_states": [
+          "BONUS_RESULT"
         ]
       },
       "wire": null,
-      "natural_request": "No es una request independiente: el cliente resuelve el bonus desde steps[].extraFeatures devuelto por normal_spin.",
+      "natural_request": "Elegir la bandeja superior izquierda. No genera request HTTP; client_index=3.",
+      "response_model_id": null,
       "coverage": {
-        "status": "INCOMPLETE"
+        "status": "COMPLETE"
       },
       "notes": [
-        "game.js resolveBonusGame() consumes extraFeatures directly.",
-        "The generic client API exposes /spin/skillbonusresult, but no Maids Cafe Riches call site was found; it is intentionally not indexed as an executable game action."
+        "client_index deriva del orden positionPlates() del cliente y no es un parámetro enviado al servidor."
+      ]
+    },
+    "bonus_plate_top_right": {
+      "action_id": "bonus_plate_top_right",
+      "classification": {
+        "category": "CLIENT_UI",
+        "natural_name": "Elegir bandeja superior derecha",
+        "description_es": "Selecciona una de las cinco bandejas del bonus Pick One."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "bonus_plate_choice",
+        "parent_action": "natural_bonus",
+        "requires_state": "BONUS_CHOICE_REQUIRED",
+        "produces_states": [
+          "BONUS_RESULT"
+        ]
+      },
+      "wire": null,
+      "natural_request": "Elegir la bandeja superior derecha. No genera request HTTP; client_index=1.",
+      "response_model_id": null,
+      "coverage": {
+        "status": "COMPLETE"
+      },
+      "notes": [
+        "client_index deriva del orden positionPlates() del cliente y no es un parámetro enviado al servidor."
+      ]
+    },
+    "bonus_plate_center": {
+      "action_id": "bonus_plate_center",
+      "classification": {
+        "category": "CLIENT_UI",
+        "natural_name": "Elegir bandeja central",
+        "description_es": "Selecciona una de las cinco bandejas del bonus Pick One."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "bonus_plate_choice",
+        "parent_action": "natural_bonus",
+        "requires_state": "BONUS_CHOICE_REQUIRED",
+        "produces_states": [
+          "BONUS_RESULT"
+        ]
+      },
+      "wire": null,
+      "natural_request": "Elegir la bandeja central. No genera request HTTP; client_index=4.",
+      "response_model_id": null,
+      "coverage": {
+        "status": "COMPLETE"
+      },
+      "notes": [
+        "client_index deriva del orden positionPlates() del cliente y no es un parámetro enviado al servidor."
+      ]
+    },
+    "bonus_plate_bottom_left": {
+      "action_id": "bonus_plate_bottom_left",
+      "classification": {
+        "category": "CLIENT_UI",
+        "natural_name": "Elegir bandeja inferior izquierda",
+        "description_es": "Selecciona una de las cinco bandejas del bonus Pick One."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "bonus_plate_choice",
+        "parent_action": "natural_bonus",
+        "requires_state": "BONUS_CHOICE_REQUIRED",
+        "produces_states": [
+          "BONUS_RESULT"
+        ]
+      },
+      "wire": null,
+      "natural_request": "Elegir la bandeja inferior izquierda. No genera request HTTP; client_index=0.",
+      "response_model_id": null,
+      "coverage": {
+        "status": "COMPLETE"
+      },
+      "notes": [
+        "client_index deriva del orden positionPlates() del cliente y no es un parámetro enviado al servidor."
+      ]
+    },
+    "bonus_plate_bottom_right": {
+      "action_id": "bonus_plate_bottom_right",
+      "classification": {
+        "category": "CLIENT_UI",
+        "natural_name": "Elegir bandeja inferior derecha",
+        "description_es": "Selecciona una de las cinco bandejas del bonus Pick One."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "bonus_plate_choice",
+        "parent_action": "natural_bonus",
+        "requires_state": "BONUS_CHOICE_REQUIRED",
+        "produces_states": [
+          "BONUS_RESULT"
+        ]
+      },
+      "wire": null,
+      "natural_request": "Elegir la bandeja inferior derecha. No genera request HTTP; client_index=2.",
+      "response_model_id": null,
+      "coverage": {
+        "status": "COMPLETE"
+      },
+      "notes": [
+        "client_index deriva del orden positionPlates() del cliente y no es un parámetro enviado al servidor."
       ]
     }
   },
@@ -268,6 +408,49 @@
           "evidence_state": "observed"
         }
       ]
+    },
+    "bonus_plate": {
+      "expected": 5,
+      "tested": 5,
+      "status": "COMPLETE",
+      "server_request_generated": false,
+      "options": [
+        {
+          "label": "top_left",
+          "visual_position": "top_left",
+          "client_index": 3,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "top_right",
+          "visual_position": "top_right",
+          "client_index": 1,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "center",
+          "visual_position": "center",
+          "client_index": 4,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "bottom_left",
+          "visual_position": "bottom_left",
+          "client_index": 0,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "bottom_right",
+          "visual_position": "bottom_right",
+          "client_index": 2,
+          "evidence_state": "observed"
+        }
+      ],
+      "notes": [
+        "Las cinco opciones fueron seleccionadas en sesiones live separadas.",
+        "Bottom-right fue probado con network_clear previo y network_events posterior: 0 eventos.",
+        "El código del cliente confirma que las cinco bandejas comparten el mismo handler local waitForOrbSelection()."
+      ]
     }
   },
   "validation": {
@@ -281,6 +464,13 @@
     "requires_session": true,
     "dynamic_fields": [
       "Authorization"
+    ],
+    "local_only_actions": [
+      "bonus_plate_top_left",
+      "bonus_plate_top_right",
+      "bonus_plate_center",
+      "bonus_plate_bottom_left",
+      "bonus_plate_bottom_right"
     ]
   }
 }
