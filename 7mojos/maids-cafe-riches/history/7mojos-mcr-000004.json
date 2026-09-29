@@ -1,0 +1,27 @@
+{
+  "history_id": "7mojos-mcr-000004",
+  "provider_id": "7mojos",
+  "game_id": "maids-cafe-riches",
+  "action_id": "normal_spin_stake_8",
+  "response_model_id": "spin-normal-success-v1",
+  "observed_at": "2026-09-29T03:25:06Z",
+  "previous_history_id": null,
+  "request": {
+    "linesCount": 40,
+    "betPerLine": 0.2,
+    "usingOperatorFreeSpins": false,
+    "spinMode": null
+  },
+  "response_observed": {
+    "success": true,
+    "betTotal": "8.0",
+    "betPerLine": 0.2,
+    "balanceInitial": "99992.0",
+    "balanceAfterStart": "99984.0",
+    "totalEarns": "0.0"
+  },
+  "resulting_state": "ROUND_FINISHED",
+  "validation": {
+    "status": "OBSERVED"
+  }
+}
