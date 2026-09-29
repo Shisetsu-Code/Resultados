@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "game_id": "golden-vegas-3x3",
+  "title": "Golden Vegas 3x3",
+  "source_url": "https://www.7mojos.com/slots/golden-vegas-3x3",
+  "client": {
+    "url": "https://de-cgm.horances.com/slots/2/",
+    "game_token": "gv3x3"
+  },
+  "metadata": {
+    "lines": 5,
+    "reels": 3,
+    "rows": 3,
+    "rtp": 94.2,
+    "volatility": "Medium",
+    "features": [
+      "Wild",
+      "Free Spins",
+      "Bonus Wheel",
+      "Buy Free Spins"
+    ]
+  },
+  "status": "PARTIAL",
+  "actions": {
+    "normal_spin": {
+      "action_id": "normal_spin",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "FEATURE_PENDING"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 5,
+          "betPerLine": 0.05,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "5 líneas x 0.05 PLM por línea.",
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "buy_free_spins_x100": {
+      "action_id": "buy_free_spins_x100",
+      "classification": {
+        "category": "PURCHASE",
+        "natural_name": "Comprar 12 Free Spins x100"
+      },
+      "evidence_state": "inferred",
+      "relation": {
+        "belongs_to": "free_spins_purchase",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "FREE_SPINS_INTRO",
+          "FREE_SPINS_RUNNING"
+        ]
+      },
+      "wire": null,
+      "natural_request": "UI observada: 25.00 PLM de compra con base bet 0.25 PLM; la request exacta no quedó capturada.",
+      "coverage": {
+        "status": "INCOMPLETE"
+      }
+    }
+  },
+  "notes": [
+    "Normal spin observed: POST /api/v2/spin/placebet HTTP 200.",
+    "Displayed total bet: 0.25 PLM = 5 x 0.05.",
+    "BUY FREE SPINS UI observed at cost 25.00 PLM for 0.25 PLM base bet (x100).",
+    "Purchase visibly started 12 Free Spins; balance decreased consistently by 25.00 PLM.",
+    "The purchase request body was not retained in Firetrace capture and is therefore not marked observed.",
+    "Page states 3 scatters trigger 12 Free Spins x4 and there is a Bonus Wheel; Bonus Wheel path not captured."
+  ],
+  "validation": {
+    "requires_session": true,
+    "dynamic_fields": [
+      "Authorization"
+    ],
+    "ready_for": [
+      "normal_spin"
+    ]
+  }
+}
