@@ -1,0 +1,70 @@
+{
+  "game_id": "maids-cafe-riches",
+  "actions": {
+    "normal_spin": {
+      "definition": "result.json#actions.normal_spin",
+      "response_model": "responses/spin-normal-success-v1.json"
+    },
+    "normal_spin_stake_8": {
+      "definition": "result.json#actions.normal_spin_stake_8",
+      "response_model": "responses/spin-normal-success-v1.json"
+    },
+    "gamble_color_red": {
+      "definition": "result.json#actions.gamble_color_red",
+      "response_model": "responses/gamble-color-success-v1.json"
+    },
+    "gamble_color_black": {
+      "definition": "result.json#actions.gamble_color_black",
+      "response_model": "responses/gamble-color-success-v1.json"
+    },
+    "collect": {
+      "definition": "result.json#actions.collect",
+      "response_model": "responses/complete-spin-success-v1.json"
+    },
+    "natural_bonus": {
+      "definition": "result.json#actions.natural_bonus",
+      "response_model": null
+    }
+  },
+  "states": {
+    "IDLE": [
+      "normal_spin",
+      "normal_spin_stake_8"
+    ],
+    "WIN_PENDING_GAMBLE": [
+      "gamble_color_red",
+      "gamble_color_black",
+      "collect"
+    ],
+    "BONUS_RUNNING": []
+  },
+  "groups": {
+    "base_game": [
+      "normal_spin",
+      "normal_spin_stake_8"
+    ],
+    "gamble_color": [
+      "gamble_color_red",
+      "gamble_color_black"
+    ],
+    "settlement": [
+      "collect"
+    ],
+    "bonus": [
+      "natural_bonus"
+    ]
+  },
+  "endpoint_actions": {
+    "/api/v2/spin/placebet": [
+      "normal_spin",
+      "normal_spin_stake_8"
+    ],
+    "/api/v2/spin/gamble": [
+      "gamble_color_red",
+      "gamble_color_black"
+    ],
+    "/api/v2/spin/completespin": [
+      "collect"
+    ]
+  }
+}
