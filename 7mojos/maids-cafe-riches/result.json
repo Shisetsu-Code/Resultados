@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "game_id": "maids-cafe-riches",
+  "title": "Maids Cafe Riches",
+  "source_url": "https://www.7mojos.com/slots/maids-cafe-riches",
+  "client": {
+    "url": "https://de-cgm.horances.com/slots/2/",
+    "game_token": "mcr"
+  },
+  "metadata": {
+    "lines": 40,
+    "reels": 5,
+    "rows": 4,
+    "rtp": 96.41,
+    "volatility": "High",
+    "features": [
+      "Bonus",
+      "Wild"
+    ]
+  },
+  "status": "PARTIAL",
+  "incomplete": [
+    "Natural Bonus feature is documented by the game page but its server-side transition has not yet been observed."
+  ],
+  "actions": {
+    "normal_spin": {
+      "action_id": "normal_spin",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal",
+        "description_es": "Realiza una tirada normal de 40 líneas."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE",
+          "BONUS_RUNNING"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 40,
+          "betPerLine": 0.1,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "Tirada normal: 40 líneas x 0.10 PLM = 4.00 PLM.",
+      "copy_paste": {
+        "curl": "curl 'https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390' -X POST -H 'Content-Type: application/json' -H 'Authorization: {{LIVE_AUTHORIZATION}}' --data-raw '{\"linesCount\":40,\"betPerLine\":0.1,\"usingOperatorFreeSpins\":false,\"spinMode\":null}'"
+      },
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "normal_spin_stake_8": {
+      "action_id": "normal_spin_stake_8",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal a 8.00 PLM",
+        "description_es": "Mismo spin con stake cambiado desde la UI."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE",
+          "BONUS_RUNNING"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 40,
+          "betPerLine": 0.2,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "Tirada normal: 40 líneas x 0.20 PLM = 8.00 PLM.",
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_color_red": {
+      "action_id": "gamble_color_red",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Apostar la ganancia a rojo",
+        "description_es": "Duplica la ganancia si la carta resulta roja."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_color",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "WIN_PENDING_GAMBLE",
+          "ROUND_FINISHED"
+        ]
+      },
+      "preconditions": [
+        {
+          "path": "data.gamble.status",
+          "contains": {
+            "choiceType": 0
+          }
+        }
+      ],
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 0,
+          "option": 0
+        }
+      },
+      "natural_request": "Elegir ROJO en el gamble x2.",
+      "response_model_id": "gamble-color-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_color_black": {
+      "action_id": "gamble_color_black",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Apostar la ganancia a negro",
+        "description_es": "Duplica la ganancia si la carta resulta negra."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_color",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "WIN_PENDING_GAMBLE",
+          "ROUND_FINISHED"
+        ]
+      },
+      "preconditions": [
+        {
+          "path": "data.gamble.status",
+          "contains": {
+            "choiceType": 0
+          }
+        }
+      ],
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 0,
+          "option": 1
+        }
+      },
+      "natural_request": "Elegir NEGRO en el gamble x2.",
+      "response_model_id": "gamble-color-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "collect": {
+      "action_id": "collect",
+      "classification": {
+        "category": "SETTLE",
+        "natural_name": "Cobrar la ganancia",
+        "description_es": "Finaliza la ronda pendiente y acredita el resultado."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "settlement",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "IDLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/completespin?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": null
+      },
+      "natural_request": "Cobrar/terminar la ronda ganadora sin seguir apostando en Gamble.",
+      "response_model_id": "complete-spin-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "natural_bonus": {
+      "action_id": "natural_bonus",
+      "classification": {
+        "category": "BONUS",
+        "natural_name": "Bonus natural",
+        "description_es": "El símbolo Bonus activa un juego de bonus según la documentación pública del título."
+      },
+      "evidence_state": "inferred",
+      "relation": {
+        "belongs_to": "bonus",
+        "parent_action": "normal_spin",
+        "requires_state": "IDLE",
+        "produces_states": [
+          "BONUS_RUNNING"
+        ]
+      },
+      "wire": null,
+      "natural_request": "No es una compra ni una request independiente conocida: se dispara desde un spin normal.",
+      "coverage": {
+        "status": "INCOMPLETE"
+      }
+    }
+  },
+  "choice_domains": {
+    "gamble_color": {
+      "expected": 2,
+      "tested": 2,
+      "status": "COMPLETE",
+      "options": [
+        {
+          "label": "red",
+          "choiceType": 0,
+          "option": 0,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "black",
+          "choiceType": 0,
+          "option": 1,
+          "evidence_state": "observed"
+        }
+      ]
+    }
+  },
+  "validation": {
+    "ready_for": [
+      "normal_spin",
+      "normal_spin_stake_8",
+      "gamble_color_red",
+      "gamble_color_black",
+      "collect"
+    ],
+    "requires_session": true,
+    "dynamic_fields": [
+      "Authorization"
+    ]
+  }
+}
