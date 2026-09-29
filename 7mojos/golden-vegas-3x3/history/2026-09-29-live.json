@@ -1,0 +1,23 @@
+{
+  "history_id": "7mojos-golden-vegas-3x3-20260929",
+  "provider_id": "7mojos",
+  "game_id": "golden-vegas-3x3",
+  "observed_at": "2026-09-29",
+  "observations": [
+    "Normal spin observed: POST /api/v2/spin/placebet HTTP 200.",
+    "Displayed total bet: 0.25 PLM = 5 x 0.05.",
+    "BUY FREE SPINS UI observed at cost 25.00 PLM for 0.25 PLM base bet (x100).",
+    "Purchase visibly started 12 Free Spins; balance decreased consistently by 25.00 PLM.",
+    "The purchase request body was not retained in Firetrace capture and is therefore not marked observed.",
+    "Page states 3 scatters trigger 12 Free Spins x4 and there is a Bonus Wheel; Bonus Wheel path not captured."
+  ],
+  "request": {
+    "linesCount": 5,
+    "betPerLine": 0.05,
+    "usingOperatorFreeSpins": false,
+    "spinMode": null
+  },
+  "validation": {
+    "status": "OBSERVED"
+  }
+}
