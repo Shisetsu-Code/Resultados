@@ -1,0 +1,14 @@
+{
+  "response_model_id": "spin-normal-success-v1",
+  "expected": {
+    "http_status": 200,
+    "content_type": "application/json"
+  },
+  "invariants": [
+    "response HTTP status == 200",
+    "request linesCount and betPerLine match the UI configuration"
+  ],
+  "variable_fields": [
+    "response body may be unavailable_unbounded in current Firetrace capture"
+  ]
+}
