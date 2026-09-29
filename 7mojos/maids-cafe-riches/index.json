@@ -24,6 +24,10 @@
     "natural_bonus": {
       "definition": "result.json#actions.natural_bonus",
       "response_model": null
+    },
+    "skill_bonus_result": {
+      "definition": "result.json#actions.skill_bonus_result",
+      "response_model": null
     }
   },
   "states": {
@@ -36,7 +40,9 @@
       "gamble_color_black",
       "collect"
     ],
-    "BONUS_RUNNING": []
+    "BONUS_RUNNING": [
+      "skill_bonus_result"
+    ]
   },
   "groups": {
     "base_game": [
@@ -51,7 +57,8 @@
       "collect"
     ],
     "bonus": [
-      "natural_bonus"
+      "natural_bonus",
+      "skill_bonus_result"
     ]
   },
   "endpoint_actions": {
@@ -65,6 +72,9 @@
     ],
     "/api/v2/spin/completespin": [
       "collect"
+    ],
+    "/api/v2/spin/skillbonusresult": [
+      "skill_bonus_result"
     ]
   }
 }
