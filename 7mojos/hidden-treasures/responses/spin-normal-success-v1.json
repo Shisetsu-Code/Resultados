@@ -1,0 +1,31 @@
+{
+  "response_model_id": "spin-normal-success-v1",
+  "action_ids": [
+    "normal_spin",
+    "normal_spin_stake_15"
+  ],
+  "expected": {
+    "http_status": 200,
+    "content_type": "application/json",
+    "required": {
+      "success": true,
+      "data.bet.betTotal": "number_string",
+      "data.bet.betPerLine": "number",
+      "data.bet.balanceInitial.cash": "number_string",
+      "data.bet.balanceAfterStart.cash": "number_string",
+      "data.steps": "array"
+    }
+  },
+  "invariants": [
+    "response.success == true",
+    "response.data.bet.betTotal == request.linesCount * request.betPerLine",
+    "response.data.bet.betPerLine == request.betPerLine"
+  ],
+  "variable_fields": [
+    "data.timestamp",
+    "data.bet.balanceInitial.cash",
+    "data.bet.balanceAfterStart.cash",
+    "data.bet.totalEarns",
+    "data.steps"
+  ]
+}
