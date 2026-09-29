@@ -1,0 +1,23 @@
+{
+  "history_id": "7mojos-panda-temple-riches-20260929",
+  "provider_id": "7mojos",
+  "game_id": "panda-temple-riches",
+  "observed_at": "2026-09-29",
+  "observations": [
+    "Normal spin observed: POST /api/v2/spin/placebet HTTP 200.",
+    "Displayed total bet: 1.50 PLM = 30 x 0.05.",
+    "Gamble screen exposed color x2 and suit x4.",
+    "RED observed as choiceType=0, option=0 via POST /api/v2/spin/gamble HTTP 200.",
+    "Color BLACK and all 4 suit options remain untested for this title.",
+    "Natural Free Spins: page states 3 scatters trigger 10 Free Spins with x3 wins; not captured live yet."
+  ],
+  "request": {
+    "linesCount": 30,
+    "betPerLine": 0.05,
+    "usingOperatorFreeSpins": false,
+    "spinMode": null
+  },
+  "validation": {
+    "status": "OBSERVED"
+  }
+}
