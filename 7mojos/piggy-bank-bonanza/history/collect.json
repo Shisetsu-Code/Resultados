@@ -1,0 +1,19 @@
+{
+  "history_id": "7mojos-pbb-collect-20260929",
+  "provider_id": "7mojos",
+  "game_id": "piggy-bank-bonanza",
+  "action_id": "collect",
+  "observed_at": "2026-09-29T03:38:21Z",
+  "request": null,
+  "response_observed": {
+    "success": true,
+    "balanceCash": "100013.00",
+    "totalWin": "19.00",
+    "totalBet": "2.00",
+    "finalBalance": "100013.00"
+  },
+  "resulting_state": "IDLE",
+  "validation": {
+    "status": "OBSERVED"
+  }
+}
