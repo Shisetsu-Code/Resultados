@@ -1,0 +1,15 @@
+{
+  "history_id": "7mojos-fizzling-20-hot-20260929",
+  "provider_id": "7mojos",
+  "game_id": "fizzling-20-hot",
+  "observed_at": "2026-09-29",
+  "observations": [
+    "Direct client reached the Play With Sounds startup screen in headless mode but did not advance to playable state during this pass.",
+    "No wagering request was sent.",
+    "Leave pending for a later pass; do not infer spin protocol from other 7Mojos titles."
+  ],
+  "request": null,
+  "validation": {
+    "status": "BLOCKED"
+  }
+}
