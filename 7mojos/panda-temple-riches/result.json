@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "game_id": "panda-temple-riches",
+  "title": "Panda Temple Riches",
+  "source_url": "https://www.7mojos.com/slots/panda-temple-riches",
+  "client": {
+    "url": "https://de-cgm.horances.com/slots/2/",
+    "game_token": "ptr"
+  },
+  "metadata": {
+    "lines": 30,
+    "reels": 5,
+    "rows": 3,
+    "rtp": 95.24,
+    "volatility": "High",
+    "features": [
+      "Wild",
+      "Scatter",
+      "Free Spins",
+      "Gamble"
+    ]
+  },
+  "status": "PARTIAL",
+  "actions": {
+    "normal_spin": {
+      "action_id": "normal_spin",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "FEATURE_PENDING",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 30,
+          "betPerLine": 0.05,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "30 líneas x 0.05 PLM por línea.",
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_color_red": {
+      "action_id": "gamble_color_red",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Apostar a rojo x2"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_color",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "WIN_PENDING_GAMBLE",
+          "ROUND_FINISHED"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 0,
+          "option": 0
+        }
+      },
+      "natural_request": "Elegir ROJO en Gamble x2.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    }
+  },
+  "notes": [
+    "Normal spin observed: POST /api/v2/spin/placebet HTTP 200.",
+    "Displayed total bet: 1.50 PLM = 30 x 0.05.",
+    "Gamble screen exposed color x2 and suit x4.",
+    "RED observed as choiceType=0, option=0 via POST /api/v2/spin/gamble HTTP 200.",
+    "Color BLACK and all 4 suit options remain untested for this title.",
+    "Natural Free Spins: page states 3 scatters trigger 10 Free Spins with x3 wins; not captured live yet."
+  ],
+  "validation": {
+    "requires_session": true,
+    "dynamic_fields": [
+      "Authorization"
+    ],
+    "ready_for": [
+      "normal_spin",
+      "gamble_color_red"
+    ]
+  }
+}
