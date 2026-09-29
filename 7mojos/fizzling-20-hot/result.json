@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "game_id": "fizzling-20-hot",
+  "title": "Fizzling 20 Hot",
+  "source_url": "https://www.7mojos.com/slots/fizzling-20-hot",
+  "client": {
+    "url": "https://de-cgm.horances.com/slots/2/",
+    "game_token": "f20h"
+  },
+  "metadata": {
+    "lines": 20,
+    "reels": 5,
+    "rows": 3,
+    "rtp": 95.79,
+    "volatility": "Medium",
+    "features": [
+      "Scatter Pays"
+    ]
+  },
+  "status": "BLOCKED",
+  "actions": {},
+  "notes": [
+    "Direct client reached the Play With Sounds startup screen in headless mode but did not advance to playable state during this pass.",
+    "No wagering request was sent.",
+    "Leave pending for a later pass; do not infer spin protocol from other 7Mojos titles."
+  ],
+  "validation": {
+    "requires_session": true,
+    "dynamic_fields": [
+      "Authorization"
+    ],
+    "ready_for": []
+  }
+}
