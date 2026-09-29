@@ -1,0 +1,30 @@
+{
+  "history_id": "7mojos-mcr-000002",
+  "provider_id": "7mojos",
+  "game_id": "maids-cafe-riches",
+  "action_id": "gamble_color_red",
+  "response_model_id": "gamble-color-success-v1",
+  "observed_at": "2026-09-29T03:24:24Z",
+  "previous_history_id": "7mojos-mcr-000001",
+  "previous_action_id": "normal_spin",
+  "request": {
+    "type": 0,
+    "choiceType": 0,
+    "option": 0
+  },
+  "response_observed": {
+    "success": true,
+    "betTotal": "13.4",
+    "guessed": true,
+    "result": 0,
+    "totalEarns": "26.8",
+    "next": {
+      "choiceType": 0,
+      "multiplier": 2
+    }
+  },
+  "resulting_state": "WIN_PENDING_GAMBLE",
+  "validation": {
+    "status": "OBSERVED"
+  }
+}
