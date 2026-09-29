@@ -88,20 +88,17 @@ Las acciones listas para replay con sesión viva son:
 El header `Authorization` siempre debe obtenerse de una sesión viva.
 
 
-## Endpoint descubierto en cliente: skill bonus
+## Bonus natural: relación confirmada en el cliente
 
-El bundle del juego define:
-
-`POST /api/v2/spin/skillbonusresult?1.15.2.2390`
-
-Body: `null`
-
-Relación:
+El bundle específico del juego muestra que `resolveBonusGame()` recibe el bonus desde `steps[].extraFeatures` de la respuesta del spin y lo anima directamente.
 
 ```text
 normal_spin
-  -> BONUS_RUNNING
-       -> skill_bonus_result   [INFERRED / aún no observado live]
+  -> response.steps[].extraFeatures
+       -> BONUS_RUNNING
+       -> vuelta al flujo de la ronda
 ```
 
-Esto es importante: **no debe enviarse desde IDLE**. Está indexado como acción dependiente de `BONUS_RUNNING`, pero no pasa a `observed` hasta capturarlo en una activación real.
+La API genérica del cliente contiene `/spin/skillbonusresult`, pero no encontré una llamada a ese endpoint en el flujo específico de Maids Cafe Riches. Por seguridad **no se indexa como acción ejecutable de este juego**.
+
+Falta observar una respuesta live con `extraFeatures` no vacío para pasar esta rama de `inferred` a `observed`.
