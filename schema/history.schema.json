@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "history.schema.json",
+  "type": "object",
+  "required": [
+    "history_id",
+    "provider_id",
+    "game_id",
+    "validation"
+  ],
+  "properties": {
+    "history_id": {
+      "type": "string"
+    },
+    "provider_id": {
+      "type": "string"
+    },
+    "game_id": {
+      "type": "string"
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "status"
+      ]
+    }
+  }
+}
