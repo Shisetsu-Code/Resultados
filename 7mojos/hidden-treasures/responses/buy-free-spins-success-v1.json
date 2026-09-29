@@ -1,0 +1,34 @@
+{
+  "response_model_id": "buy-free-spins-success-v1",
+  "action_ids": [
+    "buy_free_spins_x100"
+  ],
+  "expected": {
+    "http_status": 200,
+    "content_type": "application/json",
+    "required": {
+      "success": true,
+      "data.bet.spinMode": "string",
+      "data.steps": "array"
+    }
+  },
+  "invariants": [
+    "response.success == true",
+    "lower(response.data.bet.spinMode) == 'bb100'",
+    "response contains free-spins state",
+    "initial free-spins count == 10"
+  ],
+  "observed_shape": {
+    "free_spins_path": "data.steps[].special.freespins",
+    "fields": [
+      "feature",
+      "spinsCount",
+      "spins"
+    ]
+  },
+  "variable_fields": [
+    "data.timestamp",
+    "data.bet.totalEarns",
+    "data.steps[].special.freespins.spins"
+  ]
+}
