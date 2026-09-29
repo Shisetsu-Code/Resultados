@@ -23,6 +23,26 @@
     },
     "natural_bonus": {
       "definition": "result.json#actions.natural_bonus",
+      "response_model": "responses/bonus-extra-feature-success-v1.json"
+    },
+    "bonus_plate_top_left": {
+      "definition": "result.json#actions.bonus_plate_top_left",
+      "response_model": null
+    },
+    "bonus_plate_top_right": {
+      "definition": "result.json#actions.bonus_plate_top_right",
+      "response_model": null
+    },
+    "bonus_plate_center": {
+      "definition": "result.json#actions.bonus_plate_center",
+      "response_model": null
+    },
+    "bonus_plate_bottom_left": {
+      "definition": "result.json#actions.bonus_plate_bottom_left",
+      "response_model": null
+    },
+    "bonus_plate_bottom_right": {
+      "definition": "result.json#actions.bonus_plate_bottom_right",
       "response_model": null
     }
   },
@@ -36,7 +56,14 @@
       "gamble_color_black",
       "collect"
     ],
-    "BONUS_RUNNING": []
+    "BONUS_CHOICE_REQUIRED": [
+      "bonus_plate_top_left",
+      "bonus_plate_top_right",
+      "bonus_plate_center",
+      "bonus_plate_bottom_left",
+      "bonus_plate_bottom_right"
+    ],
+    "BONUS_RESULT": []
   },
   "groups": {
     "base_game": [
@@ -52,12 +79,20 @@
     ],
     "bonus": [
       "natural_bonus"
+    ],
+    "bonus_plate_choice": [
+      "bonus_plate_top_left",
+      "bonus_plate_top_right",
+      "bonus_plate_center",
+      "bonus_plate_bottom_left",
+      "bonus_plate_bottom_right"
     ]
   },
   "endpoint_actions": {
     "/api/v2/spin/placebet": [
       "normal_spin",
-      "normal_spin_stake_8"
+      "normal_spin_stake_8",
+      "natural_bonus"
     ],
     "/api/v2/spin/gamble": [
       "gamble_color_red",
@@ -66,5 +101,12 @@
     "/api/v2/spin/completespin": [
       "collect"
     ]
-  }
+  },
+  "local_only_actions": [
+    "bonus_plate_top_left",
+    "bonus_plate_top_right",
+    "bonus_plate_center",
+    "bonus_plate_bottom_left",
+    "bonus_plate_bottom_right"
+  ]
 }
