@@ -41,13 +41,16 @@
   "common_states": [
     "IDLE",
     "WIN_PENDING_GAMBLE",
+    "FREE_SPINS_INTRO",
+    "FREE_SPINS_RUNNING",
+    "FREE_SPINS_RESULT",
     "ROUND_FINISHED"
   ],
   "games": [
     {
       "game_id": "hidden-treasures",
       "token": "ht",
-      "status": "PARTIAL"
+      "status": "COMPLETE"
     },
     {
       "game_id": "piggy-bank-bonanza",
@@ -63,6 +66,7 @@
   "notes": [
     "Direct client uses gameToken=<token>.",
     "placebet/gamble/completespin were observed across multiple titles.",
+    "Buy Free Spins x100 is encoded through spinMode=BB100 on Hidden Treasures.",
     "Provider-wide fields are promoted only with cross-game evidence."
   ]
 }
