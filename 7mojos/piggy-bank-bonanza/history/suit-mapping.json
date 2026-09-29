@@ -1,0 +1,66 @@
+{
+  "history_id": "7mojos-pbb-suit-mapping-20260929",
+  "provider_id": "7mojos",
+  "game_id": "piggy-bank-bonanza",
+  "action_group": "gamble_suit",
+  "observed_at": "2026-09-29T03:33:00Z",
+  "samples": [
+    {
+      "label": "spade",
+      "request": {
+        "type": 0,
+        "choiceType": 1,
+        "option": 0
+      },
+      "response_observed": {
+        "guessed": false,
+        "result": 2
+      }
+    },
+    {
+      "label": "heart",
+      "request": {
+        "type": 0,
+        "choiceType": 1,
+        "option": 2
+      },
+      "response_observed": {
+        "guessed": true,
+        "result": 2,
+        "totalEarns": "2.00"
+      }
+    },
+    {
+      "label": "diamond",
+      "request": {
+        "type": 0,
+        "choiceType": 1,
+        "option": 3
+      },
+      "response_observed": {
+        "guessed": false,
+        "result": 0
+      }
+    },
+    {
+      "label": "club",
+      "request": {
+        "type": 0,
+        "choiceType": 1,
+        "option": 1
+      },
+      "response_observed": {
+        "guessed": false,
+        "result": 3
+      }
+    }
+  ],
+  "coverage": {
+    "tested": 4,
+    "expected": 4,
+    "status": "COMPLETE"
+  },
+  "validation": {
+    "status": "OBSERVED"
+  }
+}
