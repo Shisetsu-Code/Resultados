@@ -1,0 +1,13 @@
+{
+  "response_model_id": "spin-normal-success-v1",
+  "expected": {
+    "http_status": 200
+  },
+  "invariants": [
+    "HTTP 200",
+    "request matches UI stake"
+  ],
+  "variable_fields": [
+    "response body may be unavailable_unbounded"
+  ]
+}
