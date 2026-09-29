@@ -86,3 +86,22 @@ Las acciones listas para replay con sesión viva son:
 - collect
 
 El header `Authorization` siempre debe obtenerse de una sesión viva.
+
+
+## Endpoint descubierto en cliente: skill bonus
+
+El bundle del juego define:
+
+`POST /api/v2/spin/skillbonusresult?1.15.2.2390`
+
+Body: `null`
+
+Relación:
+
+```text
+normal_spin
+  -> BONUS_RUNNING
+       -> skill_bonus_result   [INFERRED / aún no observado live]
+```
+
+Esto es importante: **no debe enviarse desde IDLE**. Está indexado como acción dependiente de `BONUS_RUNNING`, pero no pasa a `observed` hasta capturarlo en una activación real.
