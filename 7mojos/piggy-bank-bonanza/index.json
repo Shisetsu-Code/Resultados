@@ -1,0 +1,54 @@
+{
+  "game_id": "piggy-bank-bonanza",
+  "states": {
+    "IDLE": [
+      "normal_spin",
+      "normal_spin_stake_2"
+    ],
+    "WIN_PENDING_GAMBLE": [
+      "gamble_color_red",
+      "gamble_color_black",
+      "gamble_suit_spade",
+      "gamble_suit_club",
+      "gamble_suit_heart",
+      "gamble_suit_diamond",
+      "collect"
+    ]
+  },
+  "groups": {
+    "base_game": [
+      "normal_spin",
+      "normal_spin_stake_2"
+    ],
+    "gamble_color": [
+      "gamble_color_red",
+      "gamble_color_black"
+    ],
+    "gamble_suit": [
+      "gamble_suit_spade",
+      "gamble_suit_club",
+      "gamble_suit_heart",
+      "gamble_suit_diamond"
+    ],
+    "settlement": [
+      "collect"
+    ]
+  },
+  "endpoint_actions": {
+    "/api/v2/spin/placebet": [
+      "normal_spin",
+      "normal_spin_stake_2"
+    ],
+    "/api/v2/spin/gamble": [
+      "gamble_color_red",
+      "gamble_color_black",
+      "gamble_suit_spade",
+      "gamble_suit_club",
+      "gamble_suit_heart",
+      "gamble_suit_diamond"
+    ],
+    "/api/v2/spin/completespin": [
+      "collect"
+    ]
+  }
+}
