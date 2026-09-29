@@ -1,0 +1,66 @@
+{
+  "history_id": "7mojos-ht-20260929-live",
+  "provider_id": "7mojos",
+  "game_id": "hidden-treasures",
+  "observed_at": "2026-09-29T15:04:24Z",
+  "sequence": [
+    {
+      "action_id": "normal_spin",
+      "request": {
+        "linesCount": 30,
+        "betPerLine": 0.2,
+        "usingOperatorFreeSpins": false,
+        "spinMode": null
+      },
+      "http_status": 200,
+      "ui_observed": {
+        "bet": "6.00 PLM"
+      }
+    },
+    {
+      "action_id": "normal_spin_stake_15",
+      "request": {
+        "linesCount": 30,
+        "betPerLine": 0.5,
+        "usingOperatorFreeSpins": false,
+        "spinMode": null
+      },
+      "http_status": 200,
+      "ui_observed": {
+        "bet": "15.00 PLM",
+        "win": "15.00 PLM"
+      }
+    },
+    {
+      "action_id": "buy_free_spins_x100",
+      "request": {
+        "linesCount": 30,
+        "betPerLine": 0.5,
+        "usingOperatorFreeSpins": false,
+        "spinMode": "BB100"
+      },
+      "http_status": 200,
+      "ui_observed": {
+        "purchase_cost": "1500.00 PLM",
+        "free_spins_initial": 10
+      }
+    },
+    {
+      "action_id": "continue_free_spins_intro",
+      "request": null,
+      "network_request_generated": false
+    },
+    {
+      "action_id": "complete_spin",
+      "request": null,
+      "http_status": 200
+    }
+  ],
+  "validation": {
+    "status": "OBSERVED"
+  },
+  "notes": [
+    "Current Firetrace reported large placebet response bodies as unavailable_unbounded.",
+    "A previous live capture of the same title exposed special.freespins.spinsCount=10 and spins[]."
+  ]
+}
