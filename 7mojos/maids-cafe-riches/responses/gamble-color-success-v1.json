@@ -1,0 +1,32 @@
+{
+  "response_model_id": "gamble-color-success-v1",
+  "action_ids": [
+    "gamble_color_red",
+    "gamble_color_black"
+  ],
+  "expected": {
+    "http_status": 200,
+    "content_type": "application/json",
+    "required": {
+      "success": true,
+      "data.choice.data.choiceType": 0,
+      "data.choice.data.option": "number",
+      "data.outcome.guessed": "boolean",
+      "data.outcome.data.result": "number",
+      "data.outcome.totalEarns": "number_string",
+      "data.status": "array"
+    }
+  },
+  "invariants": [
+    "response.success == true",
+    "response.data.choice.data.choiceType == request.choiceType",
+    "response.data.choice.data.option == request.option"
+  ],
+  "variable_fields": [
+    "data.choice.bet.betTotal",
+    "data.outcome.guessed",
+    "data.outcome.data.result",
+    "data.outcome.totalEarns",
+    "data.status"
+  ]
+}
