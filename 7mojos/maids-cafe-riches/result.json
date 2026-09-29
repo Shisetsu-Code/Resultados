@@ -21,8 +21,7 @@
   },
   "status": "PARTIAL",
   "incomplete": [
-    "Natural Bonus feature is documented by the game page but its live server-side transition has not yet been observed.",
-    "Client defines POST /api/v2/spin/skillbonusresult with body null, but this action remains inferred until captured live."
+    "Natural Bonus is documented and game code shows it is resolved from extraFeatures returned by normal_spin, but a live bonus-triggering response has not yet been captured."
   ],
   "actions": {
     "normal_spin": {
@@ -240,54 +239,13 @@
         ]
       },
       "wire": null,
-      "natural_request": "No es una compra ni una request independiente conocida: se dispara desde un spin normal.",
-      "coverage": {
-        "status": "INCOMPLETE"
-      }
-    },
-    "skill_bonus_result": {
-      "action_id": "skill_bonus_result",
-      "classification": {
-        "category": "BONUS",
-        "natural_name": "Resolver resultado del bonus de habilidad",
-        "description_es": "Endpoint definido por el cliente para obtener/resolver el resultado del bonus cuando el juego entra en BONUS_RUNNING."
-      },
-      "evidence_state": "inferred",
-      "relation": {
-        "belongs_to": "bonus",
-        "parent_action": "natural_bonus",
-        "requires_state": "BONUS_RUNNING",
-        "produces_states": [
-          "ROUND_FINISHED",
-          "BONUS_RUNNING"
-        ]
-      },
-      "preconditions": [
-        {
-          "source": "client_code",
-          "condition": "bonus natural activado desde normal_spin"
-        },
-        {
-          "state": "BONUS_RUNNING"
-        }
-      ],
-      "wire": {
-        "method": "POST",
-        "url": "https://de-se.horances.com/api/v2/spin/skillbonusresult?1.15.2.2390",
-        "headers": {
-          "Content-Type": "application/json",
-          "Authorization": "{{LIVE_AUTHORIZATION}}"
-        },
-        "body": null
-      },
-      "natural_request": "Pedir al servidor el resultado del bonus de habilidad ya activado. No debe enviarse desde IDLE.",
-      "response_model_id": null,
+      "natural_request": "No es una request independiente: el cliente resuelve el bonus desde steps[].extraFeatures devuelto por normal_spin.",
       "coverage": {
         "status": "INCOMPLETE"
       },
       "notes": [
-        "Endpoint y body null encontrados en game.js del cliente.",
-        "Aún no observado en tráfico real; no está listo para replay automático."
+        "game.js resolveBonusGame() consumes extraFeatures directly.",
+        "The generic client API exposes /spin/skillbonusresult, but no Maids Cafe Riches call site was found; it is intentionally not indexed as an executable game action."
       ]
     }
   },
