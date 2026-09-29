@@ -1,0 +1,22 @@
+{
+  "game_id": "colossal-pirate",
+  "actions": {
+    "normal_spin": {
+      "definition": "result.json#actions.normal_spin",
+      "response_model": "responses/spin-normal-success-v1.json"
+    },
+    "pick_chest_sample": {
+      "definition": "result.json#actions.pick_chest_sample",
+      "response_model": null
+    }
+  },
+  "states": {
+    "IDLE": [
+      "normal_spin"
+    ],
+    "FEATURE_PENDING": [
+      "pick_chest_sample"
+    ],
+    "WIN_PENDING_GAMBLE": []
+  }
+}
