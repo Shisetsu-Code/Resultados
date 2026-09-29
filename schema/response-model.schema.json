@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "response-model.schema.json",
+  "type": "object",
+  "required": [
+    "response_model_id",
+    "expected",
+    "invariants",
+    "variable_fields"
+  ],
+  "properties": {
+    "response_model_id": {
+      "type": "string"
+    },
+    "invariants": {
+      "type": "array"
+    },
+    "variable_fields": {
+      "type": "array"
+    }
+  }
+}
