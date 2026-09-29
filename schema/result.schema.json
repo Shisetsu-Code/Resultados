@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "result.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "provider_id",
+    "game_id",
+    "title",
+    "status",
+    "actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer"
+    },
+    "provider_id": {
+      "type": "string"
+    },
+    "game_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "BLOCKED",
+        "ERROR"
+      ]
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "action_id",
+          "classification",
+          "evidence_state",
+          "relation",
+          "coverage"
+        ],
+        "properties": {
+          "evidence_state": {
+            "enum": [
+              "observed",
+              "inferred",
+              "validated"
+            ]
+          },
+          "coverage": {
+            "type": "object",
+            "required": [
+              "status"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
