@@ -1,0 +1,19 @@
+{
+  "game_id": "golden-vegas-3x3",
+  "actions": {
+    "normal_spin": {
+      "definition": "result.json#actions.normal_spin",
+      "response_model": "responses/spin-normal-success-v1.json"
+    },
+    "buy_free_spins_x100": {
+      "definition": "result.json#actions.buy_free_spins_x100",
+      "response_model": null
+    }
+  },
+  "states": {
+    "IDLE": [
+      "normal_spin",
+      "buy_free_spins_x100"
+    ]
+  }
+}
