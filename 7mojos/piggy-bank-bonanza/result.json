@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "game_id": "piggy-bank-bonanza",
+  "title": "Piggy Bank Bonanza",
+  "source_url": "https://www.7mojos.com/slots/piggy-bank-bonanza",
+  "client": {
+    "url": "https://de-cgm.horances.com/slots/2/",
+    "game_token": "pbb"
+  },
+  "metadata": {
+    "lines": 40,
+    "reels": 5,
+    "rows": 4,
+    "rtp": 96.72,
+    "volatility": "Medium",
+    "features": [
+      "Wild",
+      "Scatter"
+    ]
+  },
+  "status": "COMPLETE",
+  "actions": {
+    "normal_spin": {
+      "action_id": "normal_spin",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 40,
+          "betPerLine": 0.03,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "40 líneas x 0.03 = 1.20 PLM.",
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "normal_spin_stake_2": {
+      "action_id": "normal_spin_stake_2",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal a 2.00 PLM"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 40,
+          "betPerLine": 0.05,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "40 líneas x 0.05 = 2.00 PLM.",
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_color_red": {
+      "action_id": "gamble_color_red",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Gamble color rojo"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_color",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 0,
+          "option": 0
+        }
+      },
+      "natural_request": "Elegir ROJO; paga x2.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_color_black": {
+      "action_id": "gamble_color_black",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Gamble color negro"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_color",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 0,
+          "option": 1
+        }
+      },
+      "natural_request": "Elegir NEGRO; paga x2.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_suit_spade": {
+      "action_id": "gamble_suit_spade",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Gamble palo picas"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_suit",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 1,
+          "option": 0
+        }
+      },
+      "natural_request": "Elegir PICA; paga x4.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_suit_club": {
+      "action_id": "gamble_suit_club",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Gamble palo tréboles"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_suit",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 1,
+          "option": 1
+        }
+      },
+      "natural_request": "Elegir TRÉBOL; paga x4.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_suit_heart": {
+      "action_id": "gamble_suit_heart",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Gamble palo corazones"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_suit",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 1,
+          "option": 2
+        }
+      },
+      "natural_request": "Elegir CORAZÓN; paga x4.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "gamble_suit_diamond": {
+      "action_id": "gamble_suit_diamond",
+      "classification": {
+        "category": "GAMBLE",
+        "natural_name": "Gamble palo diamantes"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "gamble_suit",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "ROUND_FINISHED",
+          "WIN_PENDING_GAMBLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/gamble?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "type": 0,
+          "choiceType": 1,
+          "option": 3
+        }
+      },
+      "natural_request": "Elegir DIAMANTE; paga x4.",
+      "response_model_id": "gamble-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "collect": {
+      "action_id": "collect",
+      "classification": {
+        "category": "SETTLE",
+        "natural_name": "Cobrar la ganancia"
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "settlement",
+        "parent_action": "normal_spin",
+        "requires_state": "WIN_PENDING_GAMBLE",
+        "produces_states": [
+          "IDLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/completespin?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": null
+      },
+      "natural_request": "Cobrar la ganancia y terminar la ronda.",
+      "response_model_id": "complete-spin-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    }
+  },
+  "choice_domains": {
+    "gamble_color": {
+      "expected": 2,
+      "tested": 2,
+      "status": "COMPLETE",
+      "options": [
+        {
+          "label": "red",
+          "choiceType": 0,
+          "option": 0,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "black",
+          "choiceType": 0,
+          "option": 1,
+          "evidence_state": "observed"
+        }
+      ]
+    },
+    "gamble_suit": {
+      "expected": 4,
+      "tested": 4,
+      "status": "COMPLETE",
+      "options": [
+        {
+          "label": "spade",
+          "choiceType": 1,
+          "option": 0,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "club",
+          "choiceType": 1,
+          "option": 1,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "heart",
+          "choiceType": 1,
+          "option": 2,
+          "evidence_state": "observed"
+        },
+        {
+          "label": "diamond",
+          "choiceType": 1,
+          "option": 3,
+          "evidence_state": "observed"
+        }
+      ]
+    }
+  },
+  "validation": {
+    "ready_for": [
+      "normal_spin",
+      "normal_spin_stake_2",
+      "gamble_color_red",
+      "gamble_color_black",
+      "gamble_suit_spade",
+      "gamble_suit_club",
+      "gamble_suit_heart",
+      "gamble_suit_diamond",
+      "collect"
+    ],
+    "requires_session": true,
+    "dynamic_fields": [
+      "Authorization"
+    ]
+  }
+}
