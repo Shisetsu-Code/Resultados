@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "game_id": "hidden-treasures",
+  "title": "Hidden Treasures",
+  "source_url": "https://www.7mojos.com/slots/hidden-treasures",
+  "client": {
+    "url": "https://de-cgm.horances.com/slots/2/",
+    "game_token": "ht"
+  },
+  "metadata": {
+    "lines": 30,
+    "reels": 5,
+    "rows": 3,
+    "features": [
+      "Wild",
+      "Scatter",
+      "Free Spins",
+      "Buy Free Spins"
+    ]
+  },
+  "status": "COMPLETE",
+  "actions": {
+    "normal_spin": {
+      "action_id": "normal_spin",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal",
+        "description_es": "Tirada normal de 30 líneas."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 30,
+          "betPerLine": 0.2,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "30 líneas x 0.20 PLM = 6.00 PLM.",
+      "copy_paste": {
+        "curl": "curl 'https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390' -X POST -H 'Content-Type: application/json' -H 'Authorization: {{LIVE_AUTHORIZATION}}' --data-raw '{\"linesCount\":30,\"betPerLine\":0.2,\"usingOperatorFreeSpins\":false,\"spinMode\":null}'"
+      },
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "normal_spin_stake_15": {
+      "action_id": "normal_spin_stake_15",
+      "classification": {
+        "category": "SPIN",
+        "natural_name": "Tirada normal a 15.00 PLM",
+        "description_es": "Mismo spin con stake cambiado desde la UI."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "base_game",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "ROUND_FINISHED"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 30,
+          "betPerLine": 0.5,
+          "usingOperatorFreeSpins": false,
+          "spinMode": null
+        }
+      },
+      "natural_request": "30 líneas x 0.50 PLM = 15.00 PLM.",
+      "response_model_id": "spin-normal-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "buy_free_spins_x100": {
+      "action_id": "buy_free_spins_x100",
+      "classification": {
+        "category": "PURCHASE",
+        "natural_name": "Comprar Free Spins x100",
+        "description_es": "Compra 10 Free Spins pagando 100 veces la apuesta base."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "free_spins_purchase",
+        "parent_action": null,
+        "requires_state": "IDLE",
+        "produces_states": [
+          "FREE_SPINS_INTRO",
+          "FREE_SPINS_RUNNING"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": {
+          "linesCount": 30,
+          "betPerLine": 0.5,
+          "usingOperatorFreeSpins": false,
+          "spinMode": "BB100"
+        }
+      },
+      "natural_request": "Con base bet 15.00 PLM, comprar 10 Free Spins por 1500.00 PLM.",
+      "copy_paste": {
+        "curl": "curl 'https://de-se.horances.com/api/v2/spin/placebet?1.15.2.2390' -X POST -H 'Content-Type: application/json' -H 'Authorization: {{LIVE_AUTHORIZATION}}' --data-raw '{\"linesCount\":30,\"betPerLine\":0.5,\"usingOperatorFreeSpins\":false,\"spinMode\":\"BB100\"}'"
+      },
+      "response_model_id": "buy-free-spins-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "continue_free_spins_intro": {
+      "action_id": "continue_free_spins_intro",
+      "classification": {
+        "category": "CLIENT_UI",
+        "natural_name": "Continuar desde la pantalla de 10 Free Spins",
+        "description_es": "Click local para pasar de la pantalla de introducción a la reproducción de los Free Spins."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "free_spins_purchase",
+        "parent_action": "buy_free_spins_x100",
+        "requires_state": "FREE_SPINS_INTRO",
+        "produces_states": [
+          "FREE_SPINS_RUNNING"
+        ]
+      },
+      "wire": null,
+      "natural_request": "Press anywhere to continue. No genera request HTTP adicional.",
+      "response_model_id": null,
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    },
+    "complete_spin": {
+      "action_id": "complete_spin",
+      "classification": {
+        "category": "SETTLE",
+        "natural_name": "Completar ronda",
+        "description_es": "Finaliza la ronda comprada después de reproducir los Free Spins."
+      },
+      "evidence_state": "observed",
+      "relation": {
+        "belongs_to": "settlement",
+        "parent_action": "buy_free_spins_x100",
+        "requires_state": "FREE_SPINS_RESULT",
+        "produces_states": [
+          "IDLE"
+        ]
+      },
+      "wire": {
+        "method": "POST",
+        "url": "https://de-se.horances.com/api/v2/spin/completespin?1.15.2.2390",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "{{LIVE_AUTHORIZATION}}"
+        },
+        "body": null
+      },
+      "natural_request": "Finalizar/acreditar el resultado de la ronda después de los Free Spins.",
+      "copy_paste": {
+        "curl": "curl 'https://de-se.horances.com/api/v2/spin/completespin?1.15.2.2390' -X POST -H 'Content-Type: application/json' -H 'Authorization: {{LIVE_AUTHORIZATION}}' --data-raw 'null'"
+      },
+      "response_model_id": "complete-spin-success-v1",
+      "coverage": {
+        "status": "COMPLETE"
+      }
+    }
+  },
+  "choice_domains": {},
+  "validation": {
+    "ready_for": [
+      "normal_spin",
+      "normal_spin_stake_15",
+      "buy_free_spins_x100",
+      "complete_spin"
+    ],
+    "requires_session": true,
+    "dynamic_fields": [
+      "Authorization"
+    ],
+    "notes": [
+      "continue_free_spins_intro is UI-only and must not be sent as HTTP."
+    ]
+  }
+}
