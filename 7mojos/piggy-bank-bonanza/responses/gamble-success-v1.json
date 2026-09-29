@@ -1,0 +1,25 @@
+{
+  "response_model_id": "gamble-success-v1",
+  "expected": {
+    "http_status": 200,
+    "required": {
+      "success": true,
+      "data.choice.data.choiceType": "number",
+      "data.choice.data.option": "number",
+      "data.outcome.guessed": "boolean",
+      "data.outcome.totalEarns": "number_string"
+    }
+  },
+  "invariants": [
+    "response.success == true",
+    "response.data.choice.data.choiceType == request.choiceType",
+    "response.data.choice.data.option == request.option"
+  ],
+  "variable_fields": [
+    "data.choice.bet.betTotal",
+    "data.outcome.guessed",
+    "data.outcome.data.result",
+    "data.outcome.totalEarns",
+    "data.status"
+  ]
+}
