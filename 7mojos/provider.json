@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "provider_id": "7mojos",
+  "display_name": "7Mojos",
+  "protocol_family": "horances",
+  "architecture": [
+    "7mojos.com",
+    "de-clb.horances.com",
+    "de-cgm.horances.com",
+    "de-se.horances.com"
+  ],
+  "common_endpoints": [
+    {
+      "id": "placebet",
+      "method": "POST",
+      "path": "/api/v2/spin/placebet?1.15.2.2390",
+      "evidence_state": "observed"
+    },
+    {
+      "id": "gamble",
+      "method": "POST",
+      "path": "/api/v2/spin/gamble?1.15.2.2390",
+      "evidence_state": "observed"
+    },
+    {
+      "id": "completespin",
+      "method": "POST",
+      "path": "/api/v2/spin/completespin?1.15.2.2390",
+      "evidence_state": "observed"
+    }
+  ],
+  "common_dynamic_fields": [
+    "Authorization"
+  ],
+  "games": [
+    {
+      "game_id": "hidden-treasures",
+      "token": "ht",
+      "status": "PARTIAL"
+    },
+    {
+      "game_id": "piggy-bank-bonanza",
+      "token": "pbb",
+      "status": "PARTIAL"
+    },
+    {
+      "game_id": "maids-cafe-riches",
+      "token": "mcr",
+      "status": "PARTIAL"
+    }
+  ],
+  "notes": [
+    "Direct client uses gameToken=<token>.",
+    "Provider-wide fields promoted only where observed across multiple titles."
+  ]
+}
