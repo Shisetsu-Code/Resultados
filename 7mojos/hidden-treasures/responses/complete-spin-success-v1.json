@@ -1,0 +1,27 @@
+{
+  "response_model_id": "complete-spin-success-v1",
+  "action_ids": [
+    "complete_spin"
+  ],
+  "expected": {
+    "http_status": 200,
+    "content_type": "application/json",
+    "required": {
+      "success": true,
+      "data.user.balance.cash": "number_string",
+      "data.spin.totalWin": "number_string",
+      "data.spin.totalBet": "number_string",
+      "data.spin.finalBalance": "number_string"
+    }
+  },
+  "invariants": [
+    "response.success == true"
+  ],
+  "variable_fields": [
+    "data.spin.timestamp",
+    "data.user.balance.cash",
+    "data.spin.totalWin",
+    "data.spin.totalBet",
+    "data.spin.finalBalance"
+  ]
+}
