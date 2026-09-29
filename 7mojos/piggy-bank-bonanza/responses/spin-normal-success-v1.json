@@ -1,0 +1,24 @@
+{
+  "response_model_id": "spin-normal-success-v1",
+  "expected": {
+    "http_status": 200,
+    "required": {
+      "success": true,
+      "data.bet.betTotal": "number_string",
+      "data.bet.betPerLine": "number",
+      "data.steps": "array"
+    }
+  },
+  "invariants": [
+    "response.success == true",
+    "response.data.bet.betTotal == request.linesCount * request.betPerLine"
+  ],
+  "variable_fields": [
+    "data.timestamp",
+    "data.bet.balanceInitial.cash",
+    "data.bet.balanceAfterStart.cash",
+    "data.bet.totalEarns",
+    "data.steps",
+    "data.gamble.status"
+  ]
+}
